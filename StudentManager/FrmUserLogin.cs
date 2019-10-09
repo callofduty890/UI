@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using Models;
 
 namespace StudentManager
 {
@@ -21,6 +22,43 @@ namespace StudentManager
         //登录
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            #region 用户输入数据验证检查是否正常
+            //登录账号
+            if (this.txtLoginId.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("请输入登录账号！", "提示信息");
+                this.txtLoginId.Focus();
+                return;
+            }
+            //输入密码不能为空
+            if (this.txtLoginPwd.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("请输入登录密码！", "提示信息");
+                this.txtLoginPwd.Focus();
+            }
+            //验证一下是否是整数
+            if (!Common.DataValidate.IsInteger(this.txtLoginId.Text.Trim()))
+            {
+                MessageBox.Show("登录账号必须是整数！", "提示信息");
+                this.txtLoginId.Focus();
+                return;
+            }
+            #endregion
+            //三范式   UI-中间层-数据访问层
+
+            #region 接收用户输入的内容
+            Admin objAdmin = new Admin()
+            {
+                //登录账号
+                LoginId = Convert.ToInt32(this.txtLoginId.Text.Trim()),
+                //登录密码
+                LoginPwd = this.txtLoginPwd.Text.Trim()
+            };
+            #endregion
+
+            #region 调用后台方法查询验证
+
+            #endregion
 
         }
         //关闭
