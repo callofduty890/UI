@@ -7,26 +7,57 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
+using DAL;
+using Models;
 
 namespace StudentManager
 {
     public partial class FrmStudentManage : Form
     {
 
+        //班级操作类
+        private StudentClassService objClassService = new StudentClassService();
+
+        //接收数据
+        private List<Student> list = null;
+
         public FrmStudentManage()
         {
             InitializeComponent();
-        
+            //初始化班级下拉框
+            this.cboClass.DataSource = objClassService.GetAllClasses();
+            //
+            this.cboClass.DisplayMember = "ClassName";
+            this.cboClass.ValueMember = "ClassId";
         }
         //按照班级查询
         private void btnQuery_Click(object sender, EventArgs e)
         {
-        
+            #region 数据验证
+            if (this.cboClass.SelectedIndex == -1)
+            {
+                MessageBox.Show("请选则班级！", "提示");
+                return;
+            }
+            #endregion
+
+            #region 数据交互
+
+            //接收查询数据
+            list = objClassService.GetStudentsByClass(this.cboClass.Text);
+            //不显示尚未封装属性
+            this.dgvStudentList.AutoGenerateColumns = false;    
+            //绑定数据源
+            this.dgvStudentList.DataSource = list;
+            //修改样式显示样式
+            new Common.DataGridViewStyle().DgvStyle1(this.dgvStudentList);
+
+            #endregion
         }
         //根据学号查询
         private void btnQueryById_Click(object sender, EventArgs e)
         {
-          
+
         }
         private void txtStudentId_KeyDown(object sender, KeyEventArgs e)
         {

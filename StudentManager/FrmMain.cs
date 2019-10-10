@@ -101,7 +101,7 @@ namespace StudentManager
         private void tsmiManageStudent_Click(object sender, EventArgs e)
         {
             FrmStudentManage objForm = new FrmStudentManage();
-           // OpenForm(objForm);
+            OpenForm(objForm);
         }
         private void btnStuManage_Click(object sender, EventArgs e)
         {
