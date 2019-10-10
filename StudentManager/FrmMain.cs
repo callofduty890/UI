@@ -24,11 +24,38 @@ namespace StudentManager
 
         #region 嵌入窗体显示
 
-    
+        //封装函数，打开新窗体
+        //关闭嵌入的窗体
+        private void ClosePreForm()
+        {
+            foreach (Control item in this.spContainer.Panel2.Controls)
+            {
+                if (item is Form)
+                {
+                    Form objControl = (Form)item;
+                    objControl.Close();
+                }
+            }
+        }
+
+        //打开新窗体
+        private void OpenForm(Form objForm)
+        {
+            ClosePreForm();//关闭前面的窗体
+            objForm.TopLevel = false;//将子窗体设置成非顶级控件      
+            objForm.FormBorderStyle = FormBorderStyle.None;//去掉子窗体的边框
+            objForm.Parent = this.spContainer.Panel2;//指定子窗体显示的容器  
+            objForm.Dock = DockStyle.Fill;//随着容器大小自动调整窗体大小
+            objForm.Show();
+        }
+
         //显示添加新学员窗体       
         private void tsmiAddStudent_Click(object sender, EventArgs e)
         {
-          
+            //
+            FrmAddStudent objForm = new FrmAddStudent();
+            //判断右侧中容器是否已经存在窗口-嵌入的基本步骤
+            OpenForm(objForm);
         }
         private void btnAddStu_Click(object sender, EventArgs e)
         {
