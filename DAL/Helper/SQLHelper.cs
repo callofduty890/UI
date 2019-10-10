@@ -71,5 +71,37 @@ namespace DAL.Helper
 
         }
 
+        //更新数据库操作 增删改
+        public static int Update(string sql)
+        {
+            //创建连接数据库对象
+            SqlConnection conn = new SqlConnection(connString);
+
+            //创建数据库操作对象
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+            try
+            {
+                //打开数据库
+                conn.Open();
+                //执行SQL语句并返回受影响的行数
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //可以进行错误日志的记录
+                throw ex;
+            }
+            finally
+            {
+                //关闭连接
+                conn.Close();
+            }
+
+
+
+
+        }
+
     }
 }

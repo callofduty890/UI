@@ -107,15 +107,73 @@ namespace StudentManager
         private void btnEidt_Click(object sender, EventArgs e)
         {
             #region 验证数据
-
+            //是否有学员需要修改
+            if (this.dgvStudentList.RowCount == 0)
+            {
+                MessageBox.Show("没有任何需要修改的学员信息！", "提示");
+                return;
+            }
+            //是否有选中
+            if (this.dgvStudentList.CurrentRow == null)
+            {
+                MessageBox.Show("请选中需要修改的学员信息！", "提示");
+                return;
+            }
             #endregion
 
+            //获取学号
+            string studentId = this.dgvStudentList.CurrentRow.Cells["StudentId"].Value.ToString();
+
+            //学号是否存在-查找数据是否存在学号
+            Student objStudent = objStuService.GetStudentsById(studentId);
+
+            //显示窗体
+            //显示修改学员信息窗口
+            FrmEditStudent objEditStudent = new FrmEditStudent(objStudent);
+            objEditStudent.ShowDialog();
+            //同步刷新
+            btnQuery_Click(null, null);
 
         }
         //删除学员对象
         private void btnDel_Click(object sender, EventArgs e)
         {
-           
+            #region 数据验证
+            //有无学员
+            if (this.dgvStudentList.RowCount == 0)
+            {
+                MessageBox.Show("没有任何需要删除的学员！", "提示");
+                return;
+            }
+            //是否选中
+            if (this.dgvStudentList.CurrentRow == null)
+            {
+                MessageBox.Show("请选中需要删除的学员！", "提示");
+                return;
+            }
+            #endregion
+
+
+
+            #region 数据交互
+                //提示信息
+                DialogResult result = MessageBox.Show("确实要删除吗？", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (result==DialogResult.Cancel)
+                {
+                    return;
+                }
+                //获取学号
+                string studentId = this.dgvStudentList.CurrentRow.Cells["StudentId"].Value.ToString();
+                if (objStuService.DeleteStudentById(studentId)==1)
+                {
+                    btnQuery_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("删除失败");
+                }
+            #endregion
+
         }
         //姓名降序
         private void btnNameDESC_Click(object sender, EventArgs e)
@@ -130,7 +188,7 @@ namespace StudentManager
         //添加行号
         private void dgvStudentList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-        
+            Common.DataGridViewStyle.DgvRowPostPaint(this.dgvStudentList, e);
         }
         //打印当前学员信息
         private void btnPrint_Click(object sender, EventArgs e)

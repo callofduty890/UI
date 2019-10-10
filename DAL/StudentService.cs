@@ -58,8 +58,8 @@ namespace DAL
             sqlBuilder.Append("insert into Students(studentName,Gender,Birthday,StudentIdNo,Age,PhoneNumber,StudentAddress,CardNo,ClassId,StuImage)");
             sqlBuilder.Append(" values('{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}',{8},'{9}');select @@Identity");
             //把值传入其中
-            string sql = string.Format(sqlBuilder.ToString(), objStudent.StudentName,objStudent.Gender, objStudent.Birthday.ToString("yyyy-MM-dd"),
-        objStudent.StudentIdNo, objStudent.Age,objStudent.PhoneNumber, objStudent.StudentAddress, objStudent.CardNo,objStudent.ClassId, objStudent.StuImage);
+            string sql = string.Format(sqlBuilder.ToString(), objStudent.StudentName, objStudent.Gender, objStudent.Birthday.ToString("yyyy-MM-dd"),
+        objStudent.StudentIdNo, objStudent.Age, objStudent.PhoneNumber, objStudent.StudentAddress, objStudent.CardNo, objStudent.ClassId, objStudent.StuImage);
 
             //异常判断
             try
@@ -111,5 +111,32 @@ namespace DAL
             objReader.Close();
             return objStudent;
         }
-    }
+
+        //修改学生信息
+        public int ModifyStudent(Student objStudent)
+        {   //【1】编写SQL语句
+            StringBuilder sqlBuilder = new StringBuilder();
+            sqlBuilder.Append("update Students set studentName='{0}',Gender='{1}',Birthday='{2}',");
+            sqlBuilder.Append(
+                "StudentIdNo={3},Age={4},PhoneNumber='{5}',StudentAddress='{6}',CardNo='{7}',ClassId={8},StuImage='{9}'");
+            sqlBuilder.Append(" where StudentId={10}");
+            string sql = string.Format(sqlBuilder.ToString(), objStudent.StudentName,
+                                         objStudent.Gender, objStudent.Birthday.ToString("yyyy-MM-dd"),
+                                        objStudent.StudentIdNo, objStudent.Age,
+                                        objStudent.PhoneNumber, objStudent.StudentAddress, objStudent.CardNo,
+                                        objStudent.ClassId, objStudent.StuImage, objStudent.StudentId);
+
+            //进行交互
+            return Convert.ToInt32(SQLHelper.Update(sql));
+
+        }
+
+        //删除学生信息
+        public int DeleteStudentById(string studentId)
+        {
+            //SQL语句构建
+            string sql = "delete from Students where StudentId=" + studentId;
+            //进行交互
+            return Convert.ToInt32(SQLHelper.Update(sql));
+        }   }
 }
