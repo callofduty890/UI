@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Models;
+using DAL;
 
 namespace StudentManager
 {
@@ -57,6 +58,17 @@ namespace StudentManager
             #endregion
 
             #region 调用后台方法查询验证
+            //将输入的账号密码进行验证
+            Program.currentAdmin = new AdminService().AdminLogin(objAdmin);
+            if (Program.currentAdmin !=null)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("用户账号密码错误！", "提示信息");
+            }
 
             #endregion
 
@@ -64,7 +76,8 @@ namespace StudentManager
         //关闭
         private void btnClose_Click(object sender, EventArgs e)
         {
-           
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

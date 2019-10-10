@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-
+using Models;
 using System.Diagnostics;
 
 
@@ -11,7 +11,8 @@ namespace StudentManager
 {
     static class Program
     {
-
+        //声明用户信息的全局变量
+        public static Admin currentAdmin = null;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

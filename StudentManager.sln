@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManager", "StudentMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{5A7B00C1-F3FA-4A80-989E-040A287E64E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{18CF5961-9071-4233-A338-11F226606C6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,18 @@ Global
 		{5A7B00C1-F3FA-4A80-989E-040A287E64E0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5A7B00C1-F3FA-4A80-989E-040A287E64E0}.Release|x86.ActiveCfg = Release|Any CPU
 		{5A7B00C1-F3FA-4A80-989E-040A287E64E0}.Release|x86.Build.0 = Release|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Debug|x86.Build.0 = Debug|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Release|x86.ActiveCfg = Release|Any CPU
+		{18CF5961-9071-4233-A338-11F226606C6C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
