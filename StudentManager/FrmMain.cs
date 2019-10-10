@@ -18,7 +18,13 @@ namespace StudentManager
         public FrmMain()
         {
             InitializeComponent();
-      
+            //显示当前用户
+            this.lblCurrentUser.Text = Program.currentAdmin.AdminName + "]";
+            //显示主窗体背景
+            this.spContainer.Panel2.BackgroundImage = Image.FromFile("mainbg.png");
+            this.spContainer.Panel2.BackgroundImageLayout = ImageLayout.Stretch;
+            //显示版本号
+            this.lblVersion.Text = "当前版本：V" + "超人视觉:1.0";
 
         }
 
