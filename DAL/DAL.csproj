@@ -47,6 +47,7 @@
     <Compile Include="Helper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentClassService.cs" />
+    <Compile Include="StudentService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

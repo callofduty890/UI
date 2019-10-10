@@ -14,13 +14,13 @@ namespace DAL.Helper
         //连接语句
         private static readonly string connString = @"Server=DESKTOP-CTV4ATU\SQLSERVER;DataBase=SMDB;Uid=sa;Pwd=123456";
 
-        //执行多结果查询
+        ////执行多结果查询
         public static SqlDataReader GetReader(string sql)
         {
             //创建数据库连接对象
             SqlConnection conn = new SqlConnection(connString);
-            //创建数据库操作对象
-            SqlCommand cmd = new SqlCommand(sql, conn);
+        //创建数据库操作对象
+        SqlCommand cmd = new SqlCommand(sql, conn);
             try
             {
                 //打开数据库
@@ -40,6 +40,36 @@ namespace DAL.Helper
 
         }
 
+        //单一查询结果，如果查询到了返回第一行第一列，其他结果忽略
+        public static object GetSingleResult(string sql)
+        {
+            //创建连接数据库对象
+            SqlConnection conn = new SqlConnection(connString);
+
+            //创建数据库操作对象
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+            //查找结果
+            try
+            {
+                //打开数据库
+                conn.Open();
+                //返回执行结果
+                object result = cmd.ExecuteScalar();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                //可以进行错误日志的记录
+                throw ex;
+            }
+            finally
+            {
+                //关闭连接
+                conn.Close();
+            }
+
+        }
 
     }
 }
