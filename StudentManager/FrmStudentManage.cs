@@ -17,6 +17,8 @@ namespace StudentManager
 
         //班级操作类
         private StudentClassService objClassService = new StudentClassService();
+        //学生操作类
+        private StudentService objStuService = new StudentService();
 
         //接收数据
         private List<Student> list = null;
@@ -57,6 +59,39 @@ namespace StudentManager
         //根据学号查询
         private void btnQueryById_Click(object sender, EventArgs e)
         {
+            #region 数据验证
+            //学号是否为空
+            if (this.txtStudentId.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("请输入学号！", "提示信息");
+                this.txtStudentId.Focus();
+                return;
+            }
+            //学号是否为整数
+            if (!Common.DataValidate.IsInteger(this.txtStudentId.Text.Trim()))
+            {
+                MessageBox.Show("学号必须是正整数！", "提示信息");
+                this.txtStudentId.SelectAll();
+                this.txtStudentId.Focus();
+                return;
+            }
+            //学号是否存在-查找数据是否存在学号
+            Student objStudent = objStuService.GetStudentsById(this.txtStudentId.Text.Trim());
+            //判断是否为空
+            if (objStudent==null)
+            {
+                MessageBox.Show("学员信息不存在！", "提示信息");
+                this.txtStudentId.Focus();
+                return;
+            }
+            #endregion
+
+
+
+            #region 数据交互
+            FrmStudentInfo frmStudentInfo = new FrmStudentInfo(objStudent);
+            frmStudentInfo.Show();
+            #endregion
 
         }
         private void txtStudentId_KeyDown(object sender, KeyEventArgs e)
@@ -71,7 +106,11 @@ namespace StudentManager
         //修改学员对象
         private void btnEidt_Click(object sender, EventArgs e)
         {
-          
+            #region 验证数据
+
+            #endregion
+
+
         }
         //删除学员对象
         private void btnDel_Click(object sender, EventArgs e)
