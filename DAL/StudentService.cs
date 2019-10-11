@@ -112,6 +112,42 @@ namespace DAL
             return objStudent;
         }
 
+        //按考勤卡号获取全部学生信息
+        public Student GetStudentByCardNo(string CardNo)
+        {
+            //构建SQL语句
+            string sql = "select StudentId,StudentName,Gender,Birthday,ClassName,StudentIdNo,PhoneNumber,StudentAddress,CardNo,StuImage from Students";
+            sql += " inner join StudentClass on Students.ClassId=StudentClass.ClassId ";
+            sql += " where CardNo='{0}'";
+            sql = string.Format(sql, CardNo);
+            //接受返回值
+            SqlDataReader objReader = SQLHelper.GetReader(sql);
+            //构建接受泛型列表
+            Student objStudent = new Student();
+            //循环接收
+            if (objReader.Read())
+            {
+
+                objStudent = new Student()
+                {
+                    StudentId = Convert.ToInt32(objReader["StudentId"]),
+                    StudentName = objReader["StudentName"].ToString(),
+                    Gender = objReader["Gender"].ToString(),
+                    Birthday = Convert.ToDateTime(objReader["Birthday"]),
+                    ClassName = objReader["ClassName"].ToString(),
+                    CardNo = objReader["CardNo"].ToString(),
+                    StudentIdNo = objReader["StudentIdNo"].ToString(),
+                    PhoneNumber = objReader["PhoneNumber"].ToString(),
+                    StudentAddress = objReader["StudentAddress"].ToString(),
+                    StuImage = objReader["StuImage"] == null ? "" : objReader["StuImage"].ToString()
+                };
+
+            }
+            //关闭连接-返回全部的值
+            objReader.Close();
+            return objStudent;
+        }
+
         //修改学生信息
         public int ModifyStudent(Student objStudent)
         {   //【1】编写SQL语句

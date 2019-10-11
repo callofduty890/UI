@@ -103,5 +103,14 @@ namespace DAL.Helper
 
         }
 
+        /// <summary>
+        /// 获取服务器的时间
+        /// </summary>
+        /// <returns></returns>
+        public static DateTime GetServerTime()
+        {
+            //转换成时间
+            return Convert.ToDateTime(GetSingleResult("select getdate()"));
+        }
     }
 }
