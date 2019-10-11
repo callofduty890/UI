@@ -121,7 +121,7 @@ namespace StudentManager
         private void tsmi_AQuery_Click(object sender, EventArgs e)
         {
             FrmAttendanceQuery objForm = new FrmAttendanceQuery();
-           // OpenForm(objForm);
+            OpenForm(objForm);
         }
         private void btnAttendanceQuery_Click(object sender, EventArgs e)
         {

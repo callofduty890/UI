@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using DAL.Helper;
 
+using System.Data;
+using System.Data.SqlClient;
+using Models;
+using Models.Ext;
+
 namespace DAL
 {
     //操作考勤类
@@ -56,6 +61,41 @@ namespace DAL
             {
                 return "打卡失败！系统出现问题，请联系管理员！" + ex.Message;
             }
+        }
+
+        //根据时间段还有姓名查询考勤
+        public List<StudentExt> GetStuByDate(DateTime beginDate, DateTime endDate, string name)
+        {
+            //构建SQL语句
+            string sql = "select StudentId,StudentName,Gender,DTime,ClassName,Attendance.CardNo from Students ";
+            sql += " inner join StudentClass on Students.ClassId=StudentClass.ClassId ";
+            sql += " inner join Attendance on Students.CardNo=Attendance.CardNo";
+            sql += " where DTime between '2019-10-11 00:00:00' and '2019-10-12 00:00:00'";
+
+            //判断输入姓名
+            if (name!=null&&name.Length!=0)
+            {
+                sql += string.Format(" and StudentName='{0}'", name);
+            }
+            //对签到时间进行排序
+            sql += " Order By DTime ASC";
+
+            SqlDataReader objReader = SQLHelper.GetReader(sql);
+            List<StudentExt> list = new List<StudentExt>();
+            while (objReader.Read())
+            {
+                list.Add(new StudentExt()
+                {
+                    StudentId = Convert.ToInt32(objReader["StudentId"]),
+                    StudentName = objReader["StudentName"].ToString(),
+                    Gender = objReader["Gender"].ToString(),
+                    CardNo = objReader["CardNo"].ToString(),
+                    ClassName = objReader["ClassName"].ToString(),
+                    DTime = Convert.ToDateTime(objReader["DTime"])
+                });
+            }
+            return list;
+
         }
     }
 }
