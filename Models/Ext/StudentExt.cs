@@ -13,5 +13,13 @@ namespace Models.Ext
     {
         //签到时间
         public DateTime DTime { get; set; }
+
+        //CShape考试成绩
+        public string CSharp { get; set; }
+
+        //SQLserver考试成绩
+        public string SQLServerDB { get; set; }
+
+        public bool cc { get; set; }
     }
 }
