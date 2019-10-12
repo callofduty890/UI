@@ -8,7 +8,6 @@ using DAL.Helper;
 using System.Data;
 using System.Data.SqlClient;
 
-using Models;
 
 namespace DAL
 {
@@ -70,7 +69,14 @@ namespace DAL
             return list;
         }
 
+        //获取全部班级信息-Datset
+        public DataSet GetAllClass()
+        {
+            string sql = "select ClassId,ClassName from StudentClass";
+            //传入执行SQL语句
+            return SQLHelper.GetDataSet(sql);
 
+        }
 
     }
 }

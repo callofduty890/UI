@@ -91,7 +91,7 @@ namespace StudentManager
         private void tsmiQuery_Click(object sender, EventArgs e)
         {
             FrmScoreQuery objForm = new FrmScoreQuery();
-           // OpenForm(objForm);
+            OpenForm(objForm);
         }
         private void btnScoreQuery_Click(object sender, EventArgs e)
         {
@@ -111,7 +111,7 @@ namespace StudentManager
         private void tsmiQueryAndAnalysis_Click(object sender, EventArgs e)
         {
             FrmScoreManage objForm = new FrmScoreManage();
-          //  OpenForm(objForm);
+            OpenForm(objForm);
         }
         private void btnScoreAnalasys_Click(object sender, EventArgs e)
         {

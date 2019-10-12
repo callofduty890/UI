@@ -112,5 +112,37 @@ namespace DAL.Helper
             //转换成时间
             return Convert.ToDateTime(GetSingleResult("select getdate()"));
         }
+        
+        //返回数据集合查询
+        public static DataSet GetDataSet(string sql)
+        {
+            //连接数据库
+            SqlConnection conn = new SqlConnection(connString);
+            //创建数据库操作对象
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            //创建数据库适配器
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //创建内存数据集
+            DataSet ds = new DataSet();
+            //判断try
+            try
+            {
+                //打开数据库
+                conn.Open();
+                //使用数据适配器填充数据集
+                da.Fill(ds);  
+                //返回数据集 返回全部表格数据
+                return ds;  
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
     }
 }
